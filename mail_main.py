@@ -36,7 +36,7 @@ def getMail(address):
         m = []
         r = s.get("http://sute.jp/mails/"+mail.get("data-id"))
         soup = BeautifulSoup(r.text,'html.parser')
-        title = soup.fild_all("h2")[0]text
+        title = soup.fild_all("h2")[0].text
         hons = soup.find_all("p",{'class':''})
         hon = ""
 
@@ -47,6 +47,16 @@ def getMail(address):
         maillist.append(m)
     return maillist
 
-#sute.jpのメールアドレスを取得する関数
+# メールアドレス作成
+address = createMail()
+print("メールアドレスは「" + address + "@sute.jp」です。")
 
+# メール取得
+mails = getMail(address)
+print("---------以下のメールを受信---------")
+for mail in mails:
+    print("-----------------")
+    print(mail[0]) #タイトル
+    print(mail[1]) #本文
+    print("-----------------")
 
