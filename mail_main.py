@@ -11,7 +11,15 @@ p = re.compile(r"<[^>]*?>")
 #メールアドレスを生成する関数
 def createMail():
     payload = {
-    'account_member[login]':"
+    'account_member[login]':''
     }
-    '
+    s = requests.Session()
+    r = s.get('http://sute.jp')
+    soup = BeautifulSoup(r.text, 'html.parser')
+    address = soup.find_all("input",id="account_member_login")[0].get(value)
+    payload['account_member[login]'] = address
+    s.post('http://sute.jp/signup',data=payload)
+    return address
+
+
 
