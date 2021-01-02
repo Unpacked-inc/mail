@@ -27,6 +27,24 @@ def getMail(address):
     payload = {
     'user_session[login]':address
     }
+    r = s.post('http://sute.jp/signin',data=payload)
+    soup = BeautifulSoup(r.text,'html.parser')
+    mails = soup.find_all("li",{"class":"messeage"})
+    maillist = []
     
+    for mail in mails:
+        m = []
+        r = s.get("http://sute.jp/mails/"+mail.get("data-id"))
+        soup = BeautifulSoup(r.text,'html.parser')
+        title = soup.fild_all("h2")[0]text
+        hons = soup.find_all("p",{'class':''})
+        hon = ""
+
+        for data in hons:
+            hon = hon + "\n" + p.sub("",str(data))
+        m.append(title)
+        m.append(hon[1:])
+        maillist.append(m)
+    return maillist
 
 
