@@ -21,5 +21,12 @@ def createMail():
     s.post('http://sute.jp/signup',data=payload)
     return address
 
+#メールアドレスを取得する関数
+def getMail(address):
+    s = requests.Session()
+    payload = {
+    'user_session[login]':address
+    }
+    
 
 
