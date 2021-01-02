@@ -47,4 +47,6 @@ def getMail(address):
         maillist.append(m)
     return maillist
 
+#sute.jpのメールアドレスを取得する関数
+
 
